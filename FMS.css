@@ -69,3 +69,47 @@
     font-size: 80px; 
     font-weight: bold; 
   }
+
+.login-form {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #0056b3;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #004494;
+}
