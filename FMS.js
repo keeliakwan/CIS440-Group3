@@ -1,41 +1,109 @@
-
-
-//import database from "./database.json" assert { type: 'json' };
-var accountList = [];
-let loggedIn = false;
-let currentAccount = "Not Logged In";
-
 function main() {
-   // console.log(database);
+    accountList = [];
+    loggedIn = false;
+    currentAccount = "Not Logged In";
+    userLevel = "none";
+   
     console.log("Page Loaded, Ready.");
     loadData();
 }
 
 function loadData() {
-    let newAccount = {};
+    if (localStorage.getItem('users') == null) {
+        var newAccount = {};
 
-    // Adding some default accounts for now.  Will translate tino DB later.
-    newAccount = { firstName: "Tiffany", lastName: "Hubbard", manager: false , username: "tHubbard", password: "123abc"};
-    accountList.push(newAccount);
-    console.log("Employee Tiffany Added.");
-    console.log(accountList);
-    newAccount = { firstName: "Bryan", lastName: "Thomas", manager: true, username: "bThomas", password: "abcdef" };
-    accountList.push(newAccount);
-    console.log("Employee Bryan Added.");
-    console.log(accountList);
-    newAccount = { firstName: "Frida", lastName: "Ayala Bojorquez", manager: false, username: "fBojorquez", password: "123456" };
-    accountList.push(newAccount);
-    console.log("Employee Frida Added.");
-    console.log(accountList);
-    newAccount = { firstName: "Haseen", lastName: "Aman", manager: false, username: "hAman", password: "acb123" };
-    accountList.push(newAccount);
-    console.log("Employee Haseen Added.");
-    console.log(accountList);
-    newAccount = { firstName: "Keelia", lastName: "Kwan", manager: true, username: "kKwan", password: "a1c2b3" };
-    accountList.push(newAccount);
-    console.log("Employee Keelia Added.");
-    console.log(accountList);
+        // Adding some default accounts for now.  Will translate tino DB later.
+        newAccount = { firstName: "Tiffany", lastName: "Hubbard", level: "employee", username: "tHubbard", password: "123abc"};
+        accountList.push(newAccount);
+        console.log("Employee Tiffany Added.");
+        newAccount = { firstName: "Bryan", lastName: "Thomas", level: "manager", username: "bThomas", password: "abcdef" };
+        accountList.push(newAccount);
+        console.log("Manager Bryan Added.");
+        newAccount = { firstName: "Frida", lastName: "Ayala Bojorquez", level: "employee", username: "fBojorquez", password: "123456" };
+        accountList.push(newAccount);
+        console.log("Employee Frida Added.");
+        newAccount = { firstName: "Haseen", lastName: "Aman", level: "employee", username: "hAman", password: "acb123" };
+        accountList.push(newAccount);
+        console.log("Employee Haseen Added.");
+        newAccount = { firstName: "Keelia", lastName: "Kwan", level: "manager", username: "kKwan", password: "a1c2b3" };
+        accountList.push(newAccount);
+        console.log("Manager Keelia Added.");
+        newAccount = { firstName: "Test", lastName: "Employee", level: "employee", username: "employee", password: "employee123" };
+        accountList.push(newAccount);
+        console.log("Test Employee Added.");
+        newAccount = { firstName: "Test", lastName: "Manager", level: "manager", username: "manager", password: "manager123" };
+        accountList.push(newAccount);
+        console.log("Test Manager Added.");
+        newAccount = { firstName: "Test", lastName: "Admin", level: "admin", username: "admin", password: "admin123" };
+        accountList.push(newAccount);
+        console.log("Test Admin Added.");
+        console.log(accountList);
+        console.log("Created default users.");
+        localStorage.setItem("users", JSON.stringify(accountList));
+    }
+    else {
+        accountList = JSON.parse(localStorage.getItem("users"));
+        console.log(accountList);
+        console.log("Loaded users from Local Storage");
+    }
 }
+
+function manageAccountsLink() {
+    if (userLevel === "admin") { 
+        document.location.href = "manage-accounts.html";
+    }
+    else if (userLevel === "employee" || userLevel === "manager") {
+        document.location.href = "noPermissions.html";
+    }
+    else {
+        document.location.href = "notLoggedIn.html";
+    }
+}
+
+function enterFeedbackLink() {
+    if (userLevel === "manager") { 
+        document.location.href = "enterFeedback.html";
+    }
+    else if (userLevel === "employee" || userLevel === "admin") {
+        document.location.href = "noPermissions.html";
+    }
+    else {
+        document.location.href = "notLoggedIn.html";
+    }
+}
+
+function dashboardLink() {
+    if (loggedIn) { 
+        document.location.href = "dashboard.html";
+    }
+    else {
+        document.location.href = "notLoggedIn.html";
+    }
+}
+
+function logoutLink() {
+    loggedIn = false;
+    currentAccount = "Not Logged In";
+    userLevel = "none";
+    document.location.href = "logout.html";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function newAccount() {
     // This will be plugged into the UI for new account
@@ -59,6 +127,7 @@ function login() {
     if (accountFound) {
         currentAccount = accountFound.firstName;
         loggedIn = true;
+        userLevel = accountFound.level;
     }
 
     else {
@@ -66,9 +135,5 @@ function login() {
     } 
 }
 
-function logout() {
-    currentAccount = "Not Logged In";
-    loggedIn = false;
-}
 
 $(document).ready(main);
