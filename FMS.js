@@ -1,10 +1,8 @@
 function main() {
     accountList = [];
-    loggedIn = false;
-    currentAccount = "Not Logged In";
-    userLevel = "none";
-   
     console.log("Page Loaded, Ready.");
+    checkLoginStatus();
+    console.log("Checked login status!")
     loadData();
 }
 
@@ -88,10 +86,51 @@ function logoutLink() {
     document.location.href = "logout.html";
 }
 
+function login() {
+    console.log(accountList);
+    let enteredUsername = document.getElementById('username').value;
+    // console.log("Entered Username is " + enteredUsername);
+    let enteredPassword = document.getElementById('password').value;
+    // console.log("Entered Password is " + enteredPassword);
+
+    let accountFound = accountList.find(account => account.username === enteredUsername && account.password === enteredPassword);
+
+    if (accountFound != null) {
+        currentAccount = accountFound.firstName;
+        loggedIn = true;
+        userLevel = accountFound.level;
 
 
 
+        // console.log("Current user: " + currentAccount);
+        // console.log("Logged in status: " + loggedIn);
+        // console.log("Userlevel: " + userLevel);
+        alert("You have been logged in as " + accountFound.username);
+    }
+    else {
+        // console.log("Current user: " + currentAccount);
+        // console.log("Logged in status: " + loggedIn);
+        // console.log("Userlevel: " + userLevel);
+        alert("Incorrect Login.  Please Try again");
+    } 
+}
 
+// This is not fully dont yet!
+function checkLoginStatus() {
+    loggedIn = false;
+    currentAccount = "Not Logged In";
+    userLevel = "none";
+
+    /*
+    if (sessionStorageStorage.getItem('currentUser') == null || sessionStorageStorage.getItem('currentUser') == "") {
+        console.log("Created default users.");
+        localStorage.setItem("users", JSON.stringify(accountList));
+    }
+    else {
+        accountList = JSON.parse(localStorage.getItem("users"));
+    }
+    */
+}
 
 
 
@@ -116,24 +155,6 @@ function newAccount() {
     // Add code here to create new account
 }
 
-function login() {
-    // Plug the input fields from login page to here
-    let enteredUsername = "";
-    let enteredPassword = "";
-
-    // Find account and matching password in the accountlist.
-    let accountFound = accountList.find(account => account.username === enteredUsername && account.password == enteredPassword);
-
-    if (accountFound) {
-        currentAccount = accountFound.firstName;
-        loggedIn = true;
-        userLevel = accountFound.level;
-    }
-
-    else {
-        alert("Incorrect Login.  Please Try again");
-    } 
-}
 
 
 $(document).ready(main);
