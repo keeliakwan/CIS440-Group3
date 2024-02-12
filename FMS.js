@@ -3,10 +3,19 @@ function main() {
     console.log("Page Loaded, Ready.");
     checkLoginStatus();
     console.log("Checked login status!")
-    loadData();
+    loadAccounts();
+
+    if (window.location.href.includes("manageAccounts.html")) {
+        console.log("Current Page: Manage Accounts");
+        manageAccountsPage();
+    }
+    else {
+        console.log("Current Page: The Void. How are you seeing this text?");
+    }
+
 }
 
-function loadData() {
+function loadAccounts() {
     if (localStorage.getItem('users') == null) {
         var newAccount = {};
 
@@ -42,13 +51,13 @@ function loadData() {
     else {
         accountList = JSON.parse(localStorage.getItem("users"));
         console.log(accountList);
-        console.log("Loaded users from Local Storage");
+        console.log("Loaded Accounts List from Local Storage");
     }
 }
 
 function manageAccountsLink() {
     if (userLevel === "admin") { 
-        document.location.href = "manage-accounts.html";
+        document.location.href = "manageAccounts.html";
     }
     else if (userLevel === "employee" || userLevel === "manager") {
         document.location.href = "noPermissions.html";
@@ -80,9 +89,9 @@ function dashboardLink() {
 }
 
 function logoutLink() {
-    loggedIn = false;
-    currentAccount = "Not Logged In";
-    userLevel = "none";
+    currentUser = { currentAccount: "Not Logged In", loggedIn: false, userLevel: "none"};
+    console.log(currentUser);
+    sessionStorage.setItem("storedUser", JSON.stringify(currentUser));
     document.location.href = "logout.html";
 }
 
@@ -96,44 +105,78 @@ function login() {
     let accountFound = accountList.find(account => account.username === enteredUsername && account.password === enteredPassword);
 
     if (accountFound != null) {
-        currentAccount = accountFound.firstName;
-        loggedIn = true;
-        userLevel = accountFound.level;
-
-
-
-        // console.log("Current user: " + currentAccount);
-        // console.log("Logged in status: " + loggedIn);
-        // console.log("Userlevel: " + userLevel);
+        currentUser = { currentAccount: accountFound.firstName, loggedIn: true, userLevel: accountFound.level};
+        console.log(currentUser);
+        sessionStorage.setItem("storedUser", JSON.stringify(currentUser));
         alert("You have been logged in as " + accountFound.username);
     }
     else {
-        // console.log("Current user: " + currentAccount);
-        // console.log("Logged in status: " + loggedIn);
-        // console.log("Userlevel: " + userLevel);
         alert("Incorrect Login.  Please Try again");
     } 
 }
 
-// This is not fully dont yet!
 function checkLoginStatus() {
-    loggedIn = false;
-    currentAccount = "Not Logged In";
-    userLevel = "none";
+    let storedUser = JSON.parse(sessionStorage.getItem("storedUser"));
 
-    /*
-    if (sessionStorageStorage.getItem('currentUser') == null || sessionStorageStorage.getItem('currentUser') == "") {
-        console.log("Created default users.");
-        localStorage.setItem("users", JSON.stringify(accountList));
+    if (storedUser == null || storedUser.currentAccount == "Not Logged In") {
+        loggedIn = false;
+        currentAccount = "Not Logged In";
+        userLevel = "none";
     }
     else {
-        accountList = JSON.parse(localStorage.getItem("users"));
+        loggedIn = true;
+        currentAccount = storedUser.currentAccount;
+        userLevel = storedUser.userLevel;
     }
-    */
+    console.log("Current User from Session Storage: " + currentAccount + " " + userLevel + " " + loggedIn);
 }
 
 
 
+
+function manageAccountsPage() {
+    /*
+    accountCount = accountList.length
+    console.log(accountCount);
+    itemCount = 0;
+
+    tempAccountList = JSON.stringify(accountList)
+    console.log(tempAccountList)
+
+    var accountsTable = document.getElementById("accountsTable");
+
+
+    tempAccountList.forEach(addTableRow);
+    function addTableRow() {
+        for (const [key, value] of Object.entries(tempAccountList)) {
+            console.log(key, value);
+            var row = accountsTable.insertRow(-1);
+            var usernameCell = row.insertCell(0);
+            usernameCell.innerHTML = value;
+            //var firstNameCell
+            //var lastNameCell
+            //var accountTypeCell
+            listIndex += 1;
+        }
+    }
+
+    for (const [key, value] of Object.entries(accountList)) {
+        console.log(key, value);
+        var row = accountsTable.insertRow(-1);
+        var usernameCell = row.insertCell(0);
+        usernameCell.innerHTML = value;
+        //var firstNameCell
+        //var lastNameCell
+        //var accountTypeCell
+    }
+
+   // This is on the right track!
+    do {
+        console.log(tempAccountList[itemCount]);
+        itemCount++;
+    } while (itemCount < accountCount);
+    */
+}
 
 
 

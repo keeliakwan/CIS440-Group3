@@ -120,3 +120,34 @@ button[type="submit"]:hover {
   padding-top: 100px;
   font-size: 40px;
 }
+
+#accountsListHeader {
+  text-align: center;
+  font-size:  36px;
+  border-left: none;
+  caret-color: transparent;
+}
+
+#accountsTable {
+  min-width: 100%;
+  background: #f9f9f9;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 4px;
+  caret-color: transparent;
+}
+
+table, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 10px 0 10px 0;
+}
+
+td {
+  padding: 10px 0 10px 5px;
+  border: 1px solid black;
+  border-collapse: collapse;
+}

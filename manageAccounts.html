@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Management System</title>
+    <link rel="stylesheet" type="text/css" href="./FMS.css"></style>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" type="text/javascript"></script>
+    <script src="FMS.js"></script>
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <a href="FMS.html">FMS</a>
+    </div>
+    <a href="#" id="dashboard" onclick="dashboardLink();return false;">Dashboard</a>
+    <a href="#" id="enterFeedback" onclick="enterFeedbackLink();return false;">Enter Feedback</a>
+    <a href="#" id="manageAccounts" onclick="manageAccountsLink();return false;">Manage Accounts</a>
+    <br>
+    <br>
+    <a href="login.html">Login</a>
+    <a href="#" id="logout" onclick="logoutLink();return false;">Logout</a>
+  </div>
+
+  <div class="main-content">
+    <div class="card" id="fullAccountsList">
+      <div class="card-header" id="accountsListHeader">Existing Accounts</div>
+      <table id="accountsTable">
+        <tr>
+          <th>Username</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Account Type</th>
+        </tr>
+        <tr>
+          <td>tHubbard</td>
+          <td>Tiffany</td>
+          <td>Hubbard</td>
+          <td>Employee</td>
+        </tr>
+        <tr>
+          <td>bThomas</td>
+          <td>Bryan</td>
+          <td>Thomas</td>
+          <td>Manager</td>
+        </tr>
+        <tr>
+          <td>fBojorquez</td>
+          <td>Frida</td>
+          <td>Ayala Bojorquez</td>
+          <td>Employee</td>
+        </tr>
+        <tr>
+          <td>hAman</td>
+          <td>Haseen</td>
+          <td>Aman</td>
+          <td>Employee</td>
+        </tr>
+        <tr>
+          <td>kKwan</td>
+          <td>Keelia</td>
+          <td>Kwan</td>
+          <td>Manager</td>
+        </tr>
+        <tr>
+          <td>employee</td>
+          <td>Test</td>
+          <td>Employee</td>
+          <td>Employee</td>
+        </tr>
+        <tr>
+          <td>manager</td>
+          <td>Test</td>
+          <td>Manager</td>
+          <td>Manager</td>
+        </tr>
+        <tr>
+          <td>admin</td>
+          <td>Test</td>
+          <td>Administrator</td>
+          <td>Administrator</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
