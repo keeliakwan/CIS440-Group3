@@ -23,22 +23,45 @@
   </div>
 
   <div class="main-content">
-    <div>
-      <h2>Dashboard</h2>
+    <div class="card">
+      <div>
+        <h2 id="centeredHeader">Dashboard</h2>
+      </div>
+      <div class="new-topics-section">
+        <br>
+        <h3>New Topics Discussed:</h3>
+        <p>Section for topics of potential interest.</p>
+        <ul>
+          <li><b>Topic 1:</b> Workplace conflitct management and resolution.</li>
+          <li><b>Topic 2:</b> Diversity and inclusion activities.</li>
+          <li><b>Topic 3:</b> Professional development opportunities.</li>
+          <li><b>Topic 4:</b> Time management.</li>
+          <li><b>Topic 5:</b> Enhancing the brands image and customer experience.</li>
+          <button id="addNewTopic">Add New Topic</button>
+        </ul>
+      </div>
     </div>
-    <div class="new-topics-section">
+
+    <div class="card">
+      <h2>Alerts</h2>
       <br>
-      <h3>New Topics Discussed:</h3>
-      <p>Section for topics of potential interest.</p>
-      <ul>
-        <li><b>Topic 1:</b> Workplace conflitct management and resolution.</li>
-        <li><b>Topic 2:</b> Diversity and inclusion activities.</li>
-        <li><b>Topic 3:</b> Professional development opportunities.</li>
-        <li><b>Topic 4:</b> Time management.</li>
-        <li><b>Topic 5:</b> Enhancing the brands image and customer experience.</li>
-        <button id="addNewTopic">Add New Topic</button>
-      </ul>
+      <div class="feedback-item" id="newAlert">
+        <p>No feedback exists for Frida.  (New employee)</p>
+      </div>
+      <div class="feedback-item" id="concernedAlert">
+        <p>No feedback has been entered for Tiffany this week.</p>
+      </div>
+      <div class="feedback-item" id="immediateAlert">
+        <p>No feedback entered for Haseen in over a month!</p>
+      </div>
+      <button id="addNewTopic">Clear Alerts</button>
     </div>
+
+    <div class="card">
+      <h2>Reports</h2>
+      <br>
+    </div>
+
   </div>
 </body>
 </html>
