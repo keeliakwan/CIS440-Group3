@@ -8,7 +8,7 @@ function main() {
 
     if (window.location.href.includes("manageAccounts.html")) {
         console.log("Current Page: Manage Accounts");
-        // manageAccountsPage();
+        manageAccountsTable();
     }
     else if (window.location.href.includes("newAccount.html")) {
         console.log("Current Page: New Account");
@@ -265,6 +265,37 @@ function createNewFeedback() {
     newFeedback = { entryManager: manager, employee: employee, date: date, department: department, feedback: feedback};
     feedbackList.push(newFeedback);
     localStorage.setItem("feedbacks", JSON.stringify(feedbackList));
+}
+
+function manageAccountsTable() {
+    var accountsCount = accountList.length
+    console.log("Number of Accounts: " + accountsCount);
+    currentIndex = 0;
+
+    var sortedAccounts = accountList.toSorted( compare );
+
+    function compare( a, b ) {
+        if ( a.username < b.username ){
+          return -1;
+        }
+        if ( a.username > b.username ){
+          return 1;
+        }
+        return 0;
+      }
+
+    while (currentIndex < accountsCount) {
+        let row = accountsTable.insertRow(-1);
+        let usernameCell = row.insertCell(0);
+        usernameCell.innerHTML = sortedAccounts[currentIndex].username;
+        let firstNameCell = row.insertCell(1);
+        firstNameCell.innerHTML = sortedAccounts[currentIndex].firstName;
+        let lastNameCell = row.insertCell(2);
+        lastNameCell.innerHTML = sortedAccounts[currentIndex].lastName;
+        let accountTypeCell = row.insertCell(3);
+        accountTypeCell.innerHTML = sortedAccounts[currentIndex].level;
+        currentIndex++;
+    }
 }
 
 $(document).ready(main);
